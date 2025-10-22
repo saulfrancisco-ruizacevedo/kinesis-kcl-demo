@@ -1,0 +1,19 @@
+# -- Spring Boot Application Configuration --
+spring:
+  application:
+    name: example-kcl
+
+# -- App Logging Configuration --
+logging:
+  level:
+    # Log level for the KCL library (WARN hides routine info)
+    software.amazon.kinesis: WARN
+
+# -- AWS Kinesis Configuration --
+aws:
+  kinesis:
+    # The name of your Kinesis Data Stream
+    stream-name: my-test-stream
+    # The name KCL uses for the DynamoDB lease/checkpoint table
+    app-name: my-kcl-consumer-app
+  region: us-east-1

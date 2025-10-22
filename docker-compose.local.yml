@@ -1,0 +1,27 @@
+services:
+  kcl-consumer:
+    build: .
+    restart: unless-stopped
+    environment:
+      - AWS_ACCESS_KEY_ID=key
+      - AWS_SECRET_ACCESS_KEY=access_key
+      - ENV=local
+
+  localstack:
+    image: localstack/localstack:3.8.1
+    #    network_mode: bridge
+    ports:
+      - "4566:4566"
+    volumes:
+      - './localstack-init.sh:/etc/localstack/init/ready.d/localstack-init.sh'
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+
+# To run multiple instances, you will not run 'docker-compose up'.
+# Instead, you will use the '--scale' flag from the command line:
+#
+# $ docker-compose up --scale kcl-consumer=3 -d
+#
+# This will start 3 separate containers from the same 'kcl-consumer' image.
+# KCL will coordinate these 3 instances using DynamoDB.

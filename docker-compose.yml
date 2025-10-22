@@ -1,0 +1,14 @@
+services:
+  kcl-consumer:
+    build: .
+    restart: unless-stopped
+    environment:
+      - ENV=prod
+
+# To run multiple instances, you will not run 'docker-compose up'.
+# Instead, you will use the '--scale' flag from the command line:
+#
+# $ docker-compose up --scale kcl-consumer=3 -d
+#
+# This will start 3 separate containers from the same 'kcl-consumer' image.
+# KCL will coordinate these 3 instances using DynamoDB.
