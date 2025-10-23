@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
@@ -61,8 +62,8 @@ public class KinesisConfig {
             return EnvironmentVariableCredentialsProvider.create();
         } else {
             // IAM Roles for Service Accounts
-            log.info("Using StsWebIdentityTokenFileCredentialsProvider.");
-            return StsWebIdentityTokenFileCredentialsProvider.builder().build();
+            log.info("Using DefaultCredentialsProvider.");
+            return DefaultCredentialsProvider.create();
         }
     }
 
